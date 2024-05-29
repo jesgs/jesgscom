@@ -155,7 +155,7 @@ return [
                     'convertToHtml'
                 ]
             ],
-            'Request' => [
+            'Requests' => [
                 'is_safe' => [
                     'url'
                 ]
