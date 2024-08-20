@@ -1,0 +1,5 @@
+vagrant up
+vagrant halt
+composer install
+npm run build
+npm run bundle
