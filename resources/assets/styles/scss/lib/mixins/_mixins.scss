@@ -23,3 +23,40 @@
     -moz-box-sizing: $box-model; // Firefox <= 19
     box-sizing: $box-model;
 }
+
+
+@function tint(
+    $color,
+    $percent
+) {
+    @if not _is-color($color) {
+        @error "`#{$color}` is not a valid color for the `$color` argument in " +
+      "the `tint` mixin.";
+    } @else {
+        @return mix(#fff, $color, $percent);
+    }
+}
+
+@function shade(
+    $color,
+    $percent
+) {
+    @if not _is-color($color) {
+        @error "`#{$color}` is not a valid color for the `$color` argument in " +
+      "the `shade` mixin.";
+    } @else {
+        @return mix(#000, $color, $percent);
+    }
+}
+
+/// Checks for a valid CSS color.
+///
+/// @argument {string} $color
+///
+/// @return {boolean}
+///
+/// @access private
+
+@function _is-color($color) {
+    @return (type-of($color) == color) or ($color == "currentColor");
+}
