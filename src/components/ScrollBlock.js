@@ -34,13 +34,13 @@ const ScrollBlock = ({children, secondComp, thirdComp, runAnimations}) => {
 	return (
         <>
         {showComp && (
-            <section aria-live='polite' ref={section}>{children}</section>
+            <section ref={section}>{children}</section>
         )}
         {showSecondComp && (
-            <section aria-live='polite' ref={section}>{secondComp}</section>
+            <section ref={section}>{secondComp}</section>
         )}
         {showThirdComp && (
-            <section aria-live='polite' ref={section}>{thirdComp}</section>
+            <section ref={section}>{thirdComp}</section>
         )}
         </>
 	);

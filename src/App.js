@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import ScrollBlock from './components/ScrollBlock.js';
+import ScreenReaderContent from './components/ScreenReaderContent.js';
 
 const App = () => {
 	const circOneRef = useRef();
@@ -39,6 +40,8 @@ const App = () => {
         }
 	};
 	return (
+        <>
+        <ScreenReaderContent />
 		<ScrollBlock
 			runAnimations={handleAnimations}
 			secondComp={
@@ -239,6 +242,7 @@ const App = () => {
 				</div>
 			</div>
 		</ScrollBlock>
+        </>
 	);
 };
 
