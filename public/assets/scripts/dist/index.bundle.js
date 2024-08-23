@@ -498,42 +498,157 @@ var __webpack_exports__ = {};
 var react = __webpack_require__(540);
 // EXTERNAL MODULE: ./node_modules/react-dom/client.js
 var client = __webpack_require__(338);
-;// CONCATENATED MODULE: ./src/components/Top.js
+;// CONCATENATED MODULE: ./src/components/ScrollBlock.js
 
-const Top = () => {
-  const circOneRef = (0,react.useRef)();
-  const circTwoRef = (0,react.useRef)();
-  const contact = (0,react.useRef)();
+const ScrollBlock = ({
+  children,
+  secondComp,
+  thirdComp,
+  runAnimations
+}) => {
+  const section = (0,react.useRef)();
   const [showComp, setShowComp] = (0,react.useState)(true);
+  const [showSecondComp, setShowSecondComp] = (0,react.useState)(false);
+  const [showThirdComp, setShowThirdComp] = (0,react.useState)(false);
   (0,react.useEffect)(() => {
     if (typeof window !== undefined) {
       window.addEventListener("scroll", () => {
         let scrollVal = window.scrollY;
         const totalHeight = window.innerHeight;
-        if (circOneRef.current && circTwoRef.current && contact.current) {
-          circOneRef.current.style.clipPath = `circle(${150 + scrollVal * 2}px at 0 0)`;
-          circTwoRef.current.style.clipPath = `circle(${150 + scrollVal * 2}px at 100% 100%)`;
-          contact.current.style.transform = `translate(${-50 - scrollVal / 2}%, -50% )`;
-        }
+        runAnimations();
         if (scrollVal >= totalHeight) {
           setShowComp(false);
-        } else {
+          setShowSecondComp(true);
+          setShowThirdComp(false);
+        }
+        if (scrollVal < totalHeight) {
           setShowComp(true);
+          setShowSecondComp(false);
+          setShowThirdComp(false);
+        }
+        if (scrollVal >= totalHeight + 1000) {
+          setShowComp(false);
+          setShowSecondComp(false);
+          setShowThirdComp(true);
         }
       });
     }
   }, [window, showComp]);
-  return /*#__PURE__*/react.createElement(react.Fragment, null, showComp && /*#__PURE__*/react.createElement("section", null, /*#__PURE__*/react.createElement("img", {
+  return /*#__PURE__*/react.createElement(react.Fragment, null, showComp && /*#__PURE__*/react.createElement("section", {
+    "aria-live": "polite",
+    ref: section
+  }, children), showSecondComp && /*#__PURE__*/react.createElement("section", {
+    "aria-live": "polite",
+    ref: section
+  }, secondComp), showThirdComp && /*#__PURE__*/react.createElement("section", {
+    "aria-live": "polite",
+    ref: section
+  }, thirdComp));
+};
+/* harmony default export */ const components_ScrollBlock = (ScrollBlock);
+;// CONCATENATED MODULE: ./src/App.js
+
+
+const App = () => {
+  const circOneRef = (0,react.useRef)();
+  const circTwoRef = (0,react.useRef)();
+  const contact = (0,react.useRef)();
+  const learnMore = (0,react.useRef)();
+  const blockOne = (0,react.useRef)();
+  const blockTwo = (0,react.useRef)();
+  const handleAnimations = () => {
+    let scrollVal = window.scrollY;
+    if (circOneRef.current && circTwoRef.current && contact.current && learnMore.current) {
+      circOneRef.current.style.clipPath = `circle(${150 + scrollVal * 2}px at 0 0)`;
+      circTwoRef.current.style.clipPath = `circle(${150 + scrollVal * 2}px at 100% 100%)`;
+      contact.current.style.transform = `translate(50%, ${50 + scrollVal / 2}%)`;
+      learnMore.current.style.transform = `translate(${-50 - scrollVal / 2}%, -50% )`;
+    }
+    if (blockOne.current) {
+      blockOne.current.style.transform = `translate(${-50 - scrollVal / 2}px, 0%)`;
+    }
+    if (blockTwo.current) {
+      blockTwo.current.style.transform = `translate(${-50 - scrollVal / 2}px, 0%)`;
+    }
+  };
+  return /*#__PURE__*/react.createElement(components_ScrollBlock, {
+    runAnimations: handleAnimations,
+    secondComp: /*#__PURE__*/react.createElement("div", {
+      class: "block one",
+      ref: blockOne
+    }, /*#__PURE__*/react.createElement("img", {
+      className: "jegs-logo",
+      alt: "",
+      src: "./assets/images/logo.png"
+    }), /*#__PURE__*/react.createElement("h2", null, "Who we are"), /*#__PURE__*/react.createElement("p", null, "Women, and Neurodivergent owned and operated. We bring your unique vision to life, and empower your brand to acheieve the greatest heights."), /*#__PURE__*/react.createElement("p", null, "We specialize not only in custom web development, but also SEO, Core Web Vitals, and Accessibility."), /*#__PURE__*/react.createElement("button", {
+      id: "contact",
+      ref: contact,
+      onClick: e => {
+        window.location = 'mailto:hello@jesgs.com';
+        e.preventDefault();
+      }
+    }, "Contact us", /*#__PURE__*/react.createElement("div", {
+      class: "AppButton-arrowWrap"
+    }, /*#__PURE__*/react.createElement("span", {
+      className: "AppSvg AppButton-svg",
+      style: {
+        translate: 'none',
+        rotate: 'none',
+        scale: 'none',
+        transform: 'translate3d(-100%, 100%, 0px)'
+      }
+    }, /*#__PURE__*/react.createElement("svg", {
+      width: "19",
+      height: "19",
+      viewBox: "0 0 19 19",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react.createElement("path", {
+      d: "M0.292893 17.2929C-0.0976311 17.6834 -0.0976311 18.3166 0.292893 18.7071C0.683418 19.0976 1.31658 19.0976 1.70711 18.7071L0.292893 17.2929ZM18.9706 1.02944C18.9706 0.477153 18.5228 0.0294373 17.9706 0.029437L8.97056 0.0294378C8.41828 0.0294375 7.97056 0.477153 7.97056 1.02944C7.97056 1.58172 8.41828 2.02944 8.97056 2.02944L16.9706 2.02944L16.9706 10.0294C16.9706 10.5817 17.4183 11.0294 17.9706 11.0294C18.5228 11.0294 18.9706 10.5817 18.9706 10.0294L18.9706 1.02944ZM1.70711 18.7071L18.6777 1.73654L17.2635 0.322331L0.292893 17.2929L1.70711 18.7071Z",
+      fill: "inherit"
+    })))))),
+    thirdComp: /*#__PURE__*/react.createElement("div", {
+      class: "block two",
+      ref: blockTwo
+    }, /*#__PURE__*/react.createElement("img", {
+      className: "jegs-logo",
+      alt: "",
+      src: "./assets/images/logo.png"
+    }), /*#__PURE__*/react.createElement("h2", null, "What we do"), /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, "Custom development"), /*#__PURE__*/react.createElement("li", null, "Custom Block Themes"), /*#__PURE__*/react.createElement("li", null, "Custom Classic Themes"), /*#__PURE__*/react.createElement("li", null, "Custom Plugins"), /*#__PURE__*/react.createElement("li", null, "Web Design: websites, e-commerce help, and more!"), /*#__PURE__*/react.createElement("li", null, "Web Develpment: Animations, forms, and more!")), /*#__PURE__*/react.createElement("button", {
+      id: "contact",
+      ref: contact,
+      onClick: e => {
+        window.location = 'mailto:hello@jesgs.com';
+        e.preventDefault();
+      }
+    }, "Contact us", /*#__PURE__*/react.createElement("div", {
+      class: "AppButton-arrowWrap"
+    }, /*#__PURE__*/react.createElement("span", {
+      className: "AppSvg AppButton-svg",
+      style: {
+        translate: 'none',
+        rotate: 'none',
+        scale: 'none',
+        transform: 'translate3d(-100%, 100%, 0px)'
+      }
+    }, /*#__PURE__*/react.createElement("svg", {
+      width: "19",
+      height: "19",
+      viewBox: "0 0 19 19",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/react.createElement("path", {
+      d: "M0.292893 17.2929C-0.0976311 17.6834 -0.0976311 18.3166 0.292893 18.7071C0.683418 19.0976 1.31658 19.0976 1.70711 18.7071L0.292893 17.2929ZM18.9706 1.02944C18.9706 0.477153 18.5228 0.0294373 17.9706 0.029437L8.97056 0.0294378C8.41828 0.0294375 7.97056 0.477153 7.97056 1.02944C7.97056 1.58172 8.41828 2.02944 8.97056 2.02944L16.9706 2.02944L16.9706 10.0294C16.9706 10.5817 17.4183 11.0294 17.9706 11.0294C18.5228 11.0294 18.9706 10.5817 18.9706 10.0294L18.9706 1.02944ZM1.70711 18.7071L18.6777 1.73654L17.2635 0.322331L0.292893 17.2929L1.70711 18.7071Z",
+      fill: "inherit"
+    }))))))
+  }, /*#__PURE__*/react.createElement("img", {
     className: "jegs-logo",
     alt: "",
     src: "./assets/images/logo.png"
   }), /*#__PURE__*/react.createElement("h1", null, "Jesgs Interactive"), /*#__PURE__*/react.createElement("div", {
     ref: circOneRef,
     className: "circle1"
-  }, /*#__PURE__*/react.createElement("h2", null, "Web")), /*#__PURE__*/react.createElement("div", {
-    ref: circTwoRef,
-    className: "circle2"
-  }, /*#__PURE__*/react.createElement("h2", null, "Development"), /*#__PURE__*/react.createElement("button", {
+  }, /*#__PURE__*/react.createElement("h2", null, "Web"), /*#__PURE__*/react.createElement("button", {
     id: "contact",
     ref: contact,
     onClick: e => {
@@ -559,14 +674,35 @@ const Top = () => {
   }, /*#__PURE__*/react.createElement("path", {
     d: "M0.292893 17.2929C-0.0976311 17.6834 -0.0976311 18.3166 0.292893 18.7071C0.683418 19.0976 1.31658 19.0976 1.70711 18.7071L0.292893 17.2929ZM18.9706 1.02944C18.9706 0.477153 18.5228 0.0294373 17.9706 0.029437L8.97056 0.0294378C8.41828 0.0294375 7.97056 0.477153 7.97056 1.02944C7.97056 1.58172 8.41828 2.02944 8.97056 2.02944L16.9706 2.02944L16.9706 10.0294C16.9706 10.5817 17.4183 11.0294 17.9706 11.0294C18.5228 11.0294 18.9706 10.5817 18.9706 10.0294L18.9706 1.02944ZM1.70711 18.7071L18.6777 1.73654L17.2635 0.322331L0.292893 17.2929L1.70711 18.7071Z",
     fill: "inherit"
-  }))))))));
-};
-/* harmony default export */ const components_Top = (Top);
-;// CONCATENATED MODULE: ./src/App.js
-
-
-const App = () => {
-  return /*#__PURE__*/react.createElement(components_Top, null);
+  })))))), /*#__PURE__*/react.createElement("div", {
+    ref: circTwoRef,
+    className: "circle2"
+  }, /*#__PURE__*/react.createElement("h2", null, "Development"), /*#__PURE__*/react.createElement("div", {
+    id: "learn-more",
+    ref: learnMore
+  }, /*#__PURE__*/react.createElement("p", null, "Learn More"), /*#__PURE__*/react.createElement("div", {
+    class: "AppButton-arrowWrap"
+  }, /*#__PURE__*/react.createElement("span", {
+    className: "AppSvg AppButton-svg",
+    style: {
+      translate: 'none',
+      rotate: 'none',
+      scale: 'none',
+      transform: 'translate3d(-100%, 100%, 0px)'
+    }
+  }, /*#__PURE__*/react.createElement("svg", {
+    style: {
+      rotate: '140deg'
+    },
+    width: "19",
+    height: "19",
+    viewBox: "0 0 19 19",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/react.createElement("path", {
+    d: "M0.292893 17.2929C-0.0976311 17.6834 -0.0976311 18.3166 0.292893 18.7071C0.683418 19.0976 1.31658 19.0976 1.70711 18.7071L0.292893 17.2929ZM18.9706 1.02944C18.9706 0.477153 18.5228 0.0294373 17.9706 0.029437L8.97056 0.0294378C8.41828 0.0294375 7.97056 0.477153 7.97056 1.02944C7.97056 1.58172 8.41828 2.02944 8.97056 2.02944L16.9706 2.02944L16.9706 10.0294C16.9706 10.5817 17.4183 11.0294 17.9706 11.0294C18.5228 11.0294 18.9706 10.5817 18.9706 10.0294L18.9706 1.02944ZM1.70711 18.7071L18.6777 1.73654L17.2635 0.322331L0.292893 17.2929L1.70711 18.7071Z",
+    fill: "inherit"
+  })))))));
 };
 /* harmony default export */ const src_App = (App);
 ;// CONCATENATED MODULE: ./src/index.js

@@ -7,7 +7,9 @@ section {
 	width: 100%;
 	height: 100vh;
 	background: #444;
+    background-image: url('http://jesgs.test/assets/images/about-bg.png');
 	position: fixed;
+	container-type: inline-size;
 }
 .jegs-logo {
 	position: absolute;
@@ -35,7 +37,7 @@ h2 {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: #54c4de;
+	background: #1D8096;
 	clip-path: circle(150px at 0 0);
 }
 .circle1 h2 {
@@ -43,15 +45,18 @@ h2 {
 }
 .circle2 h2 {
 	transform: translate(20%, -50%);
+    color: #000;
 }
 .circle2 {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	background: #e2b321;
+    color:#000;
 	clip-path: circle(150px at 100% 100%);
 }
-button {
+button,
+#learn-more {
 	cursor: pointer;
 	position: absolute;
 	background: transparent;
@@ -62,9 +67,88 @@ button {
 	z-index: 1;
 }
 #contact {
+	top: 0;
+	left: 0;
+	background-color: #fff;
+}
+#learn-more {
+	cursor: default;
 	bottom: 0;
 	right: 0;
+	display: inline-flex;
+	align-items: center;
+	flex-direction: column;
 }
-#contact svg {
+#learn-more p {
+	font-size: 16px;
+}
+#contact svg,
+#learn-more svg {
 	fill: #444;
+}
+
+.block {
+	background: #1D8096;
+	width: 35rem;
+	height: 100vh;
+	padding: 2rem;
+	position: absolute;
+	top: 0;
+	display: block;
+	color: #fff;
+	text-align: center;
+}
+.block.one {
+	transform: translate(-50%, 10%);
+    left: 50%;
+}
+.block.two {
+	transform: translate(-100%, 10%);
+    left: 100%;
+    background: #e2b321;
+    color: #000;
+}
+.block .jegs-logo {
+    left: 0;
+    position: static;
+    top: 0;
+    transform: unset;
+}
+.block p, .block ul {
+    text-align: left;
+}
+.block h2 {
+	text-transform: uppercase;
+	position: unset;
+	top: 50%;
+	transform: translateY(0%);
+	width: 100%;
+	font-size: 1.5em;
+}
+.block.two h2 {
+    color: #000;
+}
+.block #contact {
+    position: static;
+}
+@container (max-width: 1500px) {
+	h1 {
+		font-size: 4em;
+	}
+	h2 {
+		font-size: 3.75em;
+	}
+}
+@container (max-width: 900px) {
+	h1 {
+		font-size: 2em;
+	}
+	h2 {
+		font-size: 1.75em;
+	}
+}
+@container (max-width: 500px) {
+	.circle2 h2 {
+		transform: translate(0%, -50%);
+	}
 }
