@@ -504,42 +504,50 @@ const ScrollBlock = ({
   children,
   secondComp,
   thirdComp,
-  runAnimations
+  runAnimations,
+  runSecondAnimations
 }) => {
   const section = (0,react.useRef)();
   const [showComp, setShowComp] = (0,react.useState)(true);
   const [showSecondComp, setShowSecondComp] = (0,react.useState)(false);
-  const [showThirdComp, setShowThirdComp] = (0,react.useState)(false);
+  const [firstHeight, setFirstHeight] = (0,react.useState)(0);
   (0,react.useEffect)(() => {
     if (typeof window !== undefined) {
+      const totalHeight = window.innerHeight;
+      setFirstHeight(totalHeight);
       window.addEventListener("scroll", () => {
         let scrollVal = window.scrollY;
-        const totalHeight = window.innerHeight;
         runAnimations();
         if (scrollVal >= totalHeight) {
           setShowComp(false);
           setShowSecondComp(true);
-          setShowThirdComp(false);
+          runSecondAnimations();
         }
         if (scrollVal < totalHeight) {
           setShowComp(true);
           setShowSecondComp(false);
-          setShowThirdComp(false);
-        }
-        if (scrollVal >= totalHeight + 1000) {
-          setShowComp(false);
-          setShowSecondComp(false);
-          setShowThirdComp(true);
         }
       });
     }
   }, [window, showComp]);
-  return /*#__PURE__*/react.createElement(react.Fragment, null, showComp && /*#__PURE__*/react.createElement("section", {
-    ref: section
-  }, children), showSecondComp && /*#__PURE__*/react.createElement("section", {
-    ref: section
-  }, secondComp), showThirdComp && /*#__PURE__*/react.createElement("section", {
-    ref: section
+  return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement("section", {
+    className: "full-height",
+    ref: section,
+    style: {
+      visibility: showComp ? 'visible' : 'hidden',
+      height: showComp ? firstHeight : 0
+    }
+  }, children), /*#__PURE__*/react.createElement("section", {
+    ref: section,
+    style: {
+      visibility: showSecondComp ? 'visible' : 'hidden'
+    }
+  }, secondComp), /*#__PURE__*/react.createElement("section", {
+    ref: section,
+    className: "last",
+    style: {
+      visibility: showSecondComp ? 'visible' : 'hidden'
+    }
   }, thirdComp));
 };
 /* harmony default export */ const components_ScrollBlock = (ScrollBlock);
@@ -564,6 +572,27 @@ const App = () => {
   const learnMore = (0,react.useRef)();
   const blockOne = (0,react.useRef)();
   const blockTwo = (0,react.useRef)();
+  function slideIn(x) {
+    x.classList.add('slide');
+    x.style.opacity = 1;
+  }
+  function endSlide(x) {
+    x.classList.remove('slide');
+    x.style.opacity = 0;
+  }
+  const observeThree = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.childNodes.forEach(node => {
+          slideIn(node);
+        });
+      } else {
+        entry.target.childNodes.forEach(node => {
+          endSlide(node);
+        });
+      }
+    });
+  });
   const handleAnimations = () => {
     let scrollVal = window.scrollY;
     if (circOneRef.current && circTwoRef.current && contact.current && learnMore.current) {
@@ -572,15 +601,18 @@ const App = () => {
       contact.current.style.transform = `translate(50%, ${50 + scrollVal / 2}%)`;
       learnMore.current.style.transform = `translate(${-50 - scrollVal / 2}%, -50% )`;
     }
+  };
+  const handleSecondAnimations = () => {
     if (blockOne.current) {
-      blockOne.current.style.transform = `translate(${-50 - scrollVal / 2}px, 0%)`;
+      observeThree.observe(blockOne.current);
     }
     if (blockTwo.current) {
-      blockTwo.current.style.transform = `translate(${-50 - scrollVal / 2}px, 0%)`;
+      observeThree.observe(blockTwo.current);
     }
   };
   return /*#__PURE__*/react.createElement(react.Fragment, null, /*#__PURE__*/react.createElement(components_ScreenReaderContent, null), /*#__PURE__*/react.createElement(components_ScrollBlock, {
     runAnimations: handleAnimations,
+    runSecondAnimations: handleSecondAnimations,
     secondComp: /*#__PURE__*/react.createElement("div", {
       class: "block one",
       ref: blockOne
@@ -588,9 +620,7 @@ const App = () => {
       className: "jegs-logo",
       alt: "",
       src: "./assets/images/logo.png"
-    }), /*#__PURE__*/react.createElement("h2", null, "Who we are"), /*#__PURE__*/react.createElement("p", null, "Women, and Neurodivergent owned and operated. We bring your unique vision to life, and empower your brand to acheieve the greatest heights."), /*#__PURE__*/react.createElement("p", null, "We specialize not only in custom web development, but also SEO, Core Web Vitals, and Accessibility."), /*#__PURE__*/react.createElement("button", {
-      id: "contact",
-      ref: contact,
+    }), /*#__PURE__*/react.createElement("h2", null, "Who we are"), /*#__PURE__*/react.createElement("p", null, "Women, and Neurodivergent owned and operated. We bring your unique vision to life, and empower your brand to acheieve the greatest heights."), /*#__PURE__*/react.createElement("p", null, "We specialize not only in Custom Web Development, but also SEO (Search Engine Optimization), CWV (Core Web Vitals), and Accessibility."), /*#__PURE__*/react.createElement("button", {
       onClick: e => {
         window.location = 'mailto:hello@jesgs.com';
         e.preventDefault();
@@ -622,9 +652,7 @@ const App = () => {
       className: "jegs-logo",
       alt: "",
       src: "./assets/images/logo.png"
-    }), /*#__PURE__*/react.createElement("h2", null, "What we do"), /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, "Custom development"), /*#__PURE__*/react.createElement("li", null, "Custom Block Themes"), /*#__PURE__*/react.createElement("li", null, "Custom Classic Themes"), /*#__PURE__*/react.createElement("li", null, "Custom Plugins"), /*#__PURE__*/react.createElement("li", null, "Web Design: websites, e-commerce help, and more!"), /*#__PURE__*/react.createElement("li", null, "Web Develpment: Animations, forms, and more!")), /*#__PURE__*/react.createElement("button", {
-      id: "contact",
-      ref: contact,
+    }), /*#__PURE__*/react.createElement("h2", null, "What we do"), /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, "Custom Web Development"), /*#__PURE__*/react.createElement("li", null, "Custom App Development"), /*#__PURE__*/react.createElement("li", null, "Custom WordPress Block Themes"), /*#__PURE__*/react.createElement("li", null, "Custom WordPress Classic Themes"), /*#__PURE__*/react.createElement("li", null, "Custom WordPress Plugins"), /*#__PURE__*/react.createElement("li", null, "Web Design: websites, e-commerce help, and more!"), /*#__PURE__*/react.createElement("li", null, "Support Serviecs: Accessibility audits, Page Speed audits, and more!")), /*#__PURE__*/react.createElement("button", {
       onClick: e => {
         window.location = 'mailto:hello@jesgs.com';
         e.preventDefault();

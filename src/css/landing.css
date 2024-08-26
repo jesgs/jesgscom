@@ -10,19 +10,48 @@
 	width: 1px;
 	word-wrap: normal !important;
 }
-
+/* animations */
+@keyframes slidin {
+	0% {
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(0px);
+	}
+}
+@keyframes resolve {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.slide {
+	animation: slidin 2.3s ease-out, resolve 2.3s linear;
+}
 main {
-	min-height: 500vh;
+	min-height: 400vh;
+	background: #444;
+	background-image: url('../../public/assets/images/about-bg.png');
+    background-attachment: fixed;
+    background-position: center;
 }
 section {
+	width: 100%;
+	top: 120vh;
+	position: relative;
+}
+section.full-height {
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100vh;
-	background: #444;
-    background-image: url('http://jesgs.test/assets/images/about-bg.png');
 	position: fixed;
+	background: #444;
+	background-image: url('../../public/assets/images/about-bg.png');
 	container-type: inline-size;
+}
+section.last {
+    margin-top: 10rem;
 }
 .jegs-logo {
 	position: absolute;
@@ -50,7 +79,7 @@ h2 {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: #1D8096;
+	background: #1d8096;
 	clip-path: circle(150px at 0 0);
 }
 .circle1 h2 {
@@ -58,14 +87,14 @@ h2 {
 }
 .circle2 h2 {
 	transform: translate(20%, -50%);
-    color: #000;
+	color: #000;
 }
 .circle2 {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	background: #e2b321;
-    color:#000;
+	color: #000;
 	clip-path: circle(150px at 100% 100%);
 }
 button,
@@ -101,34 +130,25 @@ button,
 }
 
 .block {
-	background: #1D8096;
-	width: 35rem;
-	height: 100vh;
-	padding: 2rem;
-	position: absolute;
-	top: 0;
+	background: #1d8096;
+	width: calc(100% - 4rem);
+	padding: 5rem 2rem 7rem;
 	display: block;
 	color: #fff;
 	text-align: center;
 }
-.block.one {
-	transform: translate(-50%, 10%);
-    left: 50%;
+.block > * {
+    opacity: 0;
 }
 .block.two {
-	transform: translate(-100%, 10%);
-    left: 100%;
-    background: #e2b321;
-    color: #000;
+	background: #e2b321;
+	color: #000;
 }
 .block .jegs-logo {
-    left: 0;
-    position: static;
-    top: 0;
-    transform: unset;
-}
-.block p, .block ul {
-    text-align: left;
+	left: 0;
+	position: static;
+	top: 0;
+	transform: unset;
 }
 .block h2 {
 	text-transform: uppercase;
@@ -138,11 +158,19 @@ button,
 	width: 100%;
 	font-size: 1.5em;
 }
-.block.two h2 {
-    color: #000;
+.block ul {
+	list-style-type: none;
+	padding-left: 0;
 }
-.block #contact {
-    position: static;
+.block.two h2 {
+	color: #000;
+}
+.block button {
+	position: static;
+	background-color: #fff;
+}
+.block button svg {
+	fill: #444;
 }
 @container (max-width: 1500px) {
 	h1 {

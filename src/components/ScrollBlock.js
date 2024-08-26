@@ -1,47 +1,36 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 
-const ScrollBlock = ({children, secondComp, thirdComp, runAnimations}) => {
+const ScrollBlock = ({children, secondComp, thirdComp, runAnimations, runSecondAnimations}) => {
     const section = useRef()
     const [showComp, setShowComp] = useState(true)
     const [showSecondComp, setShowSecondComp] = useState(false)
-    const [showThirdComp, setShowThirdComp] = useState(false)
+    const [firstHeight, setFirstHeight] = useState(0)
 
     useEffect(() => {
         if(typeof window !== undefined) {
+            const totalHeight = window.innerHeight
+            setFirstHeight(totalHeight)
             window.addEventListener("scroll", () => {
                 let scrollVal = window.scrollY;
-                const totalHeight = window.innerHeight
                 runAnimations()
                 if(scrollVal >= totalHeight) {
                     setShowComp(false)
                     setShowSecondComp(true)
-                    setShowThirdComp(false)
+                    runSecondAnimations()
                 }
                 if (scrollVal < totalHeight) {
                     setShowComp(true)
                     setShowSecondComp(false)
-                    setShowThirdComp(false)
-                }
-                if(scrollVal >= totalHeight + 1000) {
-                    setShowComp(false)
-                    setShowSecondComp(false)
-                    setShowThirdComp(true)
                 }
             });
         }
     }, [window, showComp])
 	return (
         <>
-        {showComp && (
-            <section ref={section}>{children}</section>
-        )}
-        {showSecondComp && (
-            <section ref={section}>{secondComp}</section>
-        )}
-        {showThirdComp && (
-            <section ref={section}>{thirdComp}</section>
-        )}
+        <section className='full-height' ref={section} style={{visibility: showComp ? 'visible' : 'hidden', height: showComp ? firstHeight : 0 }}>{children}</section>
+        <section ref={section} style={{visibility: showSecondComp ? 'visible': 'hidden'}}>{secondComp}</section>
+        <section ref={section} className='last' style={{visibility: showSecondComp ? 'visible' : 'hidden'}}>{thirdComp}</section>
         </>
 	);
 };
