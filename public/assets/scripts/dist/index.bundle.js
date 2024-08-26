@@ -558,7 +558,7 @@ const ScreenReaderContent = () => {
     className: "screen-reader-text"
   }, /*#__PURE__*/react.createElement("h1", null, "Jesgs Interactive"), /*#__PURE__*/react.createElement("h2", null, "Web Development"), /*#__PURE__*/react.createElement("a", {
     href: "mailto:hello@jesgs.com"
-  }, "Contact us"), /*#__PURE__*/react.createElement("h2", null, "Who we are"), /*#__PURE__*/react.createElement("p", null, "Women, and Neurodivergent owned and operated. We bring your unique vision to life, and empower your brand to acheieve the greatest heights."), /*#__PURE__*/react.createElement("p", null, "We specialize not only in custom web development, but also SEO, Core Web Vitals, and Accessibility."), /*#__PURE__*/react.createElement("h2", null, "What we do"), /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, "Custom development"), /*#__PURE__*/react.createElement("li", null, "Custom Block Themes"), /*#__PURE__*/react.createElement("li", null, "Custom Classic Themes"), /*#__PURE__*/react.createElement("li", null, "Custom Plugins"), /*#__PURE__*/react.createElement("li", null, "Web Design: websites, e-commerce help, and more!"), /*#__PURE__*/react.createElement("li", null, "Web Develpment: Animations, forms, and more!")));
+  }, "Contact us"), /*#__PURE__*/react.createElement("h2", null, "Who we are"), /*#__PURE__*/react.createElement("p", null, "Women, and Neurodivergent owned and operated. We work empathetically with you to bring your unique vision to life, and empower your brand to acheieve your loftiest goals."), /*#__PURE__*/react.createElement("p", null, "We specialize not only in Custom Web Development, and Application Development, but also SEO (Search Engine Optimization), CWV (Core Web Vitals), and Accessibility."), /*#__PURE__*/react.createElement("p", null, "We offer competitive pricing so you can get the best value out of what you purchase. Reach out to us today to find out what you can achieve with JesGS Interactive!"), /*#__PURE__*/react.createElement("h2", null, "What we do"), /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, "Custom Web Development"), /*#__PURE__*/react.createElement("li", null, "Custom App Development"), /*#__PURE__*/react.createElement("li", null, "Custom WordPress Block Themes"), /*#__PURE__*/react.createElement("li", null, "Custom WordPress Classic Themes"), /*#__PURE__*/react.createElement("li", null, "Custom WordPress Plugins"), /*#__PURE__*/react.createElement("li", null, "Web Design: websites, e-commerce help, and more!"), /*#__PURE__*/react.createElement("li", null, "Support Serviecs: Accessibility audits, Page Speed audits, and more!")));
 };
 /* harmony default export */ const components_ScreenReaderContent = (ScreenReaderContent);
 ;// CONCATENATED MODULE: ./src/App.js
@@ -576,16 +576,33 @@ const App = () => {
     x.classList.add('slide');
     x.style.opacity = 1;
   }
+  function slideOver(x) {
+    x.classList.add('slide-over');
+    x.style.opacity = 1;
+  }
   function endSlide(x) {
-    x.classList.remove('slide');
+    if (x.classList.contains('slide')) {
+      x.classList.remove('slide');
+    }
+    if (x.classList.contains('slide-over')) {
+      x.classList.remove('slide-over');
+    }
     x.style.opacity = 0;
   }
   const observeThree = new IntersectionObserver(entries => {
+    console.log(entries[0].target);
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.childNodes.forEach(node => {
-          slideIn(node);
-        });
+        if (entry.target === blockOne.current) {
+          entry.target.childNodes.forEach(node => {
+            slideIn(node);
+          });
+        }
+        if (entry.target === blockTwo.current) {
+          entry.target.childNodes.forEach(node => {
+            slideOver(node);
+          });
+        }
       } else {
         entry.target.childNodes.forEach(node => {
           endSlide(node);
@@ -617,10 +634,17 @@ const App = () => {
       class: "block one",
       ref: blockOne
     }, /*#__PURE__*/react.createElement("img", {
-      className: "jegs-logo",
-      alt: "",
-      src: "./assets/images/logo.png"
-    }), /*#__PURE__*/react.createElement("h2", null, "Who we are"), /*#__PURE__*/react.createElement("p", null, "Women, and Neurodivergent owned and operated. We bring your unique vision to life, and empower your brand to acheieve the greatest heights."), /*#__PURE__*/react.createElement("p", null, "We specialize not only in Custom Web Development, but also SEO (Search Engine Optimization), CWV (Core Web Vitals), and Accessibility."), /*#__PURE__*/react.createElement("button", {
+      alt: "smiling people around a computer",
+      loading: "lazy",
+      width: "300",
+      height: "200",
+      src: "./assets/images/working-smiles.jpg",
+      style: {
+        clipPath: 'circle(37.1% at 50% 50%)'
+      }
+    }), /*#__PURE__*/react.createElement("h2", null, "Who we are"), /*#__PURE__*/react.createElement("p", null, "Women, and Neurodivergent owned and operated, with over 15 years industry experience \uD83D\uDC81\uD83C\uDFFD\u200D\u2640\uFE0F. We work empathetically with you to bring your unique vision \uD83D\uDC40 to life, and empower your brand to acheieve your loftiest goals \uD83C\uDFC6."), /*#__PURE__*/react.createElement("p", null, "We specialize not only in Custom Web Development, and Application Development, but also SEO (Search Engine Optimization), CWV (Core Web Vitals), and Accessibility."), /*#__PURE__*/react.createElement("p", null, "We offer ", /*#__PURE__*/react.createElement("strong", null, "competitive pricing"), " so you can get the best value out of what you purchase.", ' ', /*#__PURE__*/react.createElement("strong", null, /*#__PURE__*/react.createElement("a", {
+      href: "mailto:hello@jesgs.com"
+    }, "Reach out to us today")), " to find out what you can achieve with ", /*#__PURE__*/react.createElement("strong", null, "JesGS Interactive!")), /*#__PURE__*/react.createElement("button", {
       onClick: e => {
         window.location = 'mailto:hello@jesgs.com';
         e.preventDefault();
@@ -649,9 +673,14 @@ const App = () => {
       class: "block two",
       ref: blockTwo
     }, /*#__PURE__*/react.createElement("img", {
-      className: "jegs-logo",
-      alt: "",
-      src: "./assets/images/logo.png"
+      alt: "computer screen that reads: i design and develop experiences that make peoples lives simple",
+      loading: "lazy",
+      width: "300",
+      height: "383",
+      style: {
+        clipPath: 'circle(37.1% at 50% 50%)'
+      },
+      src: "./assets/images/what-we-do.jpg"
     }), /*#__PURE__*/react.createElement("h2", null, "What we do"), /*#__PURE__*/react.createElement("ul", null, /*#__PURE__*/react.createElement("li", null, "Custom Web Development"), /*#__PURE__*/react.createElement("li", null, "Custom App Development"), /*#__PURE__*/react.createElement("li", null, "Custom WordPress Block Themes"), /*#__PURE__*/react.createElement("li", null, "Custom WordPress Classic Themes"), /*#__PURE__*/react.createElement("li", null, "Custom WordPress Plugins"), /*#__PURE__*/react.createElement("li", null, "Web Design: websites, e-commerce help, and more!"), /*#__PURE__*/react.createElement("li", null, "Support Serviecs: Accessibility audits, Page Speed audits, and more!")), /*#__PURE__*/react.createElement("button", {
       onClick: e => {
         window.location = 'mailto:hello@jesgs.com';

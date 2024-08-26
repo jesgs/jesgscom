@@ -13,22 +13,39 @@ const App = () => {
 		x.classList.add('slide');
         x.style.opacity = 1;
 	}
+    function slideOver(x) {
+        x.classList.add('slide-over')
+        x.style.opacity = 1;
+    }
 	function endSlide(x) {
-		x.classList.remove('slide');
+        if(x.classList.contains('slide')) {
+            x.classList.remove('slide');
+        }
+		if(x.classList.contains('slide-over')) {
+            x.classList.remove('slide-over');
+        }
         x.style.opacity = 0;
 	}
 	const observeThree = new IntersectionObserver((entries) => {
-		entries.forEach((entry) => {
-			if (entry.isIntersecting) {
-				entry.target.childNodes.forEach((node) => {
-					slideIn(node);
-				});
-			} else {
-				entry.target.childNodes.forEach((node) => {
-					endSlide(node);
-				});
-			}
-		});
+        console.log(entries[0].target)
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                if(entry.target === blockOne.current) {
+                    entry.target.childNodes.forEach((node) => {
+                        slideIn(node);
+                    });
+                }
+                if(entry.target === blockTwo.current) {
+                    entry.target.childNodes.forEach((node) => {
+                        slideOver(node);
+                    });
+                }
+            } else {
+                entry.target.childNodes.forEach((node) => {
+                    endSlide(node);
+                });
+            }
+        });
 	});
 	const handleAnimations = () => {
 		let scrollVal = window.scrollY;
@@ -72,20 +89,29 @@ const App = () => {
 						ref={blockOne}
 					>
 						<img
-							className='jegs-logo'
-							alt=''
-							src='./assets/images/logo.png'
+							alt='smiling people around a computer'
+                            loading='lazy'
+                            width="300"
+                            height="200"
+							src='./assets/images/working-smiles.jpg'
+                            style={{ clipPath: 'circle(37.1% at 50% 50%)' }}
 						/>
 						<h2>Who we are</h2>
 						<p>
-							Women, and Neurodivergent owned and operated. We
-							bring your unique vision to life, and empower your
-							brand to acheieve the greatest heights.
+							Women, and Neurodivergent owned and operated, with over 15 years industry experience 💁🏽‍♀️.
+                            We work empathetically with you to
+							bring your unique vision 👀 to life, and empower your
+							brand to acheieve your loftiest goals 🏆.
 						</p>
 						<p>
-							We specialize not only in Custom Web Development,
+							We specialize not only in Custom Web Development, and Application Development,
 							but also SEO (Search Engine Optimization), CWV (Core Web Vitals), and Accessibility.
 						</p>
+                        <p>
+                            We offer <strong>competitive pricing</strong> so you can get the best value out of what you purchase.
+                            {' '}
+                            <strong><a href="mailto:hello@jesgs.com">Reach out to us today</a></strong> to find out what you can achieve with <strong>JesGS Interactive!</strong>
+                        </p>
 						<button
 							onClick={(e) => {
 								window.location = 'mailto:hello@jesgs.com';
@@ -127,9 +153,12 @@ const App = () => {
 						ref={blockTwo}
 					>
 						<img
-							className='jegs-logo'
-							alt=''
-							src='./assets/images/logo.png'
+							alt='computer screen that reads: i design and develop experiences that make peoples lives simple'
+                            loading='lazy'
+                            width="300"
+                            height="383"
+                            style={{clipPath: 'circle(37.1% at 50% 50%)'}}
+							src='./assets/images/what-we-do.jpg'
 						/>
 						<h2>What we do</h2>
 						<ul>

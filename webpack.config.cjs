@@ -45,6 +45,10 @@ module.exports = {
 				__dirname,
 				'public/images/[name].png'
 			),
+            '/resources/assets/images/[name].jpg': path.resolve(
+				__dirname,
+				'public/images/[name].jpg'
+			),
 			'/resources/assets/images/[name].mp4': path.resolve(
 				__dirname,
 				'public/images/[name].mp4'
