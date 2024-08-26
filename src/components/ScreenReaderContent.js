@@ -31,7 +31,7 @@ const ScreenReaderContent = () => {
 				<li>Custom WordPress Plugins</li>
 				<li>Web Design: websites, e-commerce help, and more!</li>
 				<li>
-					Support Serviecs: Accessibility audits, Page Speed audits,
+					Support Services: Accessibility audits, Page Speed audits,
 					and more!
 				</li>
 			</ul>

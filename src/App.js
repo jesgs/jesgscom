@@ -27,7 +27,6 @@ const App = () => {
         x.style.opacity = 0;
 	}
 	const observeThree = new IntersectionObserver((entries) => {
-        console.log(entries[0].target)
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 if(entry.target === blockOne.current) {
@@ -131,6 +130,7 @@ const App = () => {
 									}}
 								>
 									<svg
+                                        aria-hidden="true"
 										width='19'
 										height='19'
 										viewBox='0 0 19 19'
@@ -171,7 +171,7 @@ const App = () => {
 								Web Design: websites, e-commerce help, and more!
 							</li>
 							<li>
-								Support Serviecs: Accessibility audits, Page Speed audits, and more!
+								Support Services: Accessibility audits, Page Speed audits, and more!
 							</li>
 						</ul>
 						<button
@@ -193,6 +193,7 @@ const App = () => {
 									}}
 								>
 									<svg
+                                        aria-hidden="true"
 										width='19'
 										height='19'
 										viewBox='0 0 19 19'
@@ -241,6 +242,7 @@ const App = () => {
 								}}
 							>
 								<svg
+                                    aria-hidden="true"
 									width='19'
 									height='19'
 									viewBox='0 0 19 19'
@@ -265,6 +267,7 @@ const App = () => {
 						id='learn-more'
 						ref={learnMore}
 					>
+                        <div className='learn-more-inner'>
 						<p>Learn More</p>
 						<div class='AppButton-arrowWrap'>
 							<span
@@ -277,6 +280,7 @@ const App = () => {
 								}}
 							>
 								<svg
+                                    aria-hidden="true"
 									style={{ rotate: '140deg' }}
 									width='19'
 									height='19'
@@ -291,6 +295,7 @@ const App = () => {
 								</svg>
 							</span>
 						</div>
+                        </div>
 					</div>
 				</div>
 			</ScrollBlock>

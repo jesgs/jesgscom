@@ -28,9 +28,9 @@ const ScrollBlock = ({children, secondComp, thirdComp, runAnimations, runSecondA
     }, [window, showComp])
 	return (
         <>
-        <section className='full-height' ref={section} style={{visibility: showComp ? 'visible' : 'hidden', height: showComp ? firstHeight : 0 }}>{children}</section>
-        <section ref={section} style={{visibility: showSecondComp ? 'visible': 'hidden'}}>{secondComp}</section>
-        <section ref={section} className='last' style={{visibility: showSecondComp ? 'visible' : 'hidden'}}>{thirdComp}</section>
+        <section role="presentation" className='full-height' ref={section} style={{visibility: showComp ? 'visible' : 'hidden', height: showComp ? firstHeight : 0 }}>{children}</section>
+        <section role="presentation" ref={section} style={{visibility: showSecondComp ? 'visible': 'hidden'}}>{secondComp}</section>
+        <section role="presentation" ref={section} className='last' style={{visibility: showSecondComp ? 'visible' : 'hidden'}}>{thirdComp}</section>
         </>
 	);
 };
