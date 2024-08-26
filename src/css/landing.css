@@ -52,7 +52,7 @@
 main {
 	min-height: 375vh;
 	background: #444;
-	background-image: url('../../public/assets/images/about-bg.png');
+	background-image: url('../../public/assets/images/new-circles.jpg');
     background-attachment: fixed;
     background-position: center;
 }
@@ -60,14 +60,14 @@ section {
 	width: 100%;
 	top: 100vh;
 	position: relative;
+    container-type: inline-size;
 }
 section.full-height {
 	top: 0;
 	left: 0;
 	position: fixed;
 	background: #444;
-	background-image: url('../../public/assets/images/about-bg.png');
-	container-type: inline-size;
+	background-image: url('../../public/assets/images/new-circles.jpg');
 }
 section:not(.full-height) {
     margin-top: 20rem;
@@ -93,6 +93,10 @@ h2 {
 	text-align: center;
 	color: #fff;
 	font-size: 7em;
+}
+h1 {
+    color: #444;
+    background: #ffffffdd;
 }
 .circle1 {
 	position: absolute;
@@ -221,4 +225,7 @@ button,
 	.circle2 h2 {
 		transform: translate(0%, -50%);
 	}
+    .block p {
+        max-width: 95%;
+    }
 }
