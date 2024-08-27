@@ -34,7 +34,7 @@ module.exports = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
-				test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+				test: /\.(png|jpe?g|webp|gif|svg|eot|ttf|woff|woff2)$/i,
 				type: 'asset',
 			},
 		],
@@ -45,9 +45,9 @@ module.exports = {
 				__dirname,
 				'public/images/[name].png'
 			),
-            '/resources/assets/images/[name].jpg': path.resolve(
+            '/resources/assets/images/[name].webp': path.resolve(
 				__dirname,
-				'public/images/[name].jpg'
+				'public/images/[name].webp'
 			),
 			'/resources/assets/images/[name].mp4': path.resolve(
 				__dirname,
