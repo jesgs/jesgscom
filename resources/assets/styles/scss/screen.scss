@@ -1,5 +1,4 @@
 @import "lib/_normalize.scss";
-@import "../../../../node_modules/bourbon/core/_bourbon.scss";
 @import "lib/index";
 /**
  * Global Styling
@@ -205,7 +204,7 @@ h, .h {
             }
 
             &:hover {
-                color: tint($text-color, 50%);
+                color: tint($color-accent-01, 50%);
             }
         }
     }
