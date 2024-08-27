@@ -72,15 +72,17 @@ section.full-height {
 	position: fixed;
 	background: #444;
 	background-image: url('../../public/assets/images/new-circles.webp');
+    min-height: 100vh;
 }
 section:not(.full-height) {
 	margin-top: 20rem;
 }
-.jegs-logo {
-	position: absolute;
-	top: 25%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+.logo-container {
+    min-height: 291px;
+    left: 50%;
+    position: absolute;
+    top: 25%;
+    transform: translate(-50%, -50%);
 }
 img.us {
 	position: static;

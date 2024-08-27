@@ -211,11 +211,15 @@ const App = () => {
 					</div>
 				}
 			>
-				<img
+                <div className='logo-container'>
+                <img
+                    width="291"
+                    height="291"
 					className='jegs-logo'
 					alt=''
-					src='./assets/images/logo.png'
+					src='./assets/images/logo.webp'
 				/>
+                </div>
 				<h1>Jesgs Interactive</h1>
 				<div
 					ref={circOneRef}

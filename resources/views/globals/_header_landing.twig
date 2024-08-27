@@ -20,9 +20,12 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="{{mix('assets/scripts/dist/index.bundle.css')}}" media="all" />
     <link rel="preload" as="image" href="{{mix('assets/scripts/dist/images/new-circles.webp')}}" />
-
+    <link rel="stylesheet" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{mix('assets/scripts/dist/index.bundle.css')}}" />
+    <noscript><link rel="stylesheet" href="{{mix('assets/scripts/dist/index.bundle.css')}}" /></noscript>
     <script data-main="assets/scripts" src="{{mix('assets/scripts/dist/index.bundle.js')}}" defer></script>
+    <style type="text/css">
+        body,main{min-height:375vh}main{background:#444;background-attachment:fixed;background-image:url("{{mix('assets/scripts/dist/images/new-circles.webp')}}");background-position:50%;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}h1{background:#fffd;color:#444;font-size:7em;position:absolute;text-align:center;text-transform:uppercase;top:50%;transform:translateY(-50%);width:100%}section{container-type:inline-size;position:relative;top:100vh;width:100%}section:not(.full-height){margin-top:20rem}.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}section.full-height{background:#444;background-image:url("{{mix('assets/scripts/dist/images/new-circles.webp')}}");min-height: 100vh;left:0;position:fixed;top:0}.logo-container{min-height:291px;left:50%;position:absolute;top:25%;transform:translate(-50%,-50%)}@media only screen and (max-width:900px){h1{font-size:2em}}
+    </style>
 </head>
 <body>
