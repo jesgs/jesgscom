@@ -13,7 +13,6 @@ const ScrollBlock = ({children, secondComp, thirdComp, runAnimations, runSecondA
             setFirstHeight(totalHeight)
             window.addEventListener("scroll", () => {
                 let scrollVal = window.scrollY;
-                runAnimations()
                 if(scrollVal >= totalHeight) {
                     setShowComp(false)
                     setShowSecondComp(true)
@@ -22,6 +21,7 @@ const ScrollBlock = ({children, secondComp, thirdComp, runAnimations, runSecondA
                 if (scrollVal < totalHeight) {
                     setShowComp(true)
                     setShowSecondComp(false)
+                    runAnimations()
                 }
             });
         }
