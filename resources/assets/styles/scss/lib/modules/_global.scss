@@ -67,7 +67,7 @@
 
         a {
             &:link {
-                color: #FFC101;
+                color: shade($color-accent-01, 25%);
             }
 
             &.i-spy {
